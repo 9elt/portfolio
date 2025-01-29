@@ -1,89 +1,90 @@
 const hello = document.createElement("h4");
 hello.textContent = "> Welcome, I am Lorenzo, web developer and prankster";
 
-function countdown() {
+function deleteGreeting() {
     hello.textContent = hello.textContent.slice(0, -1);
 
     if (hello.textContent !== "> ") {
-        setTimeout(countdown, rnd(50, 50));
+        setTimeout(deleteGreeting, random(50, 50));
     } else {
-        setTimeout(run, 500);
+        setTimeout(typeCommand, 500);
     }
 }
 
-let i = 0;
-function run() {
-    hello.textContent += "delete system".charAt(i);
+let i1 = 0;
+function typeCommand() {
+    hello.textContent += "delete system".charAt(i1);
 
-    if (++i < "> delete system".length) {
-        setTimeout(run, rnd(50, 200));
+    if (++i1 < "> delete system".length) {
+        setTimeout(typeCommand, random(50, 200));
     }
     else {
-        setTimeout(terminal, 1_500);
+        setTimeout(terminalOutput, 1_500);
     }
 }
 
-let line = 0;
-function terminal() {
+let i2 = 0;
+function terminalOutput() {
     if (root.children.length >= output.length) {
         root.children[0].remove();
     }
 
     const p = document.createElement("p");
-    p.textContent = output[line % output.length];
+    p.textContent = output[i2 % output.length];
     root.append(p);
 
-    line++;
     window.scrollTo(0, document.body.scrollHeight);
 
-    if (line < output.length * 2) {
-        setTimeout(terminal, 7);
+    if (++i2 < output.length * 2) {
+        setTimeout(terminalOutput, 7);
     }
     else {
-        line = 0;
-        clear();
+        i2 = 0;
+        emptyLines();
     }
 }
 
-function clear() {
+let i3 = 0;
+function emptyLines() {
     if (root.children.length >= output.length) {
         root.children[0].remove();
     }
 
-    const p = document.createElement("p");
-    p.textContent = ">";
-    root.append(p);
+    root.append(...gte(1));
 
-    line++;
     window.scrollTo(0, document.body.scrollHeight);
 
-    if (line < 150) {
-        setTimeout(clear, 20);
+    if (++i3 < 150) {
+        setTimeout(emptyLines, 20);
     }
     else {
-        const notice = document.createElement("p");
-        notice.textContent = "> System deleted successfully";
-
-        const linekdin = document.createElement("a");
-        linekdin.href = "https://www.linkedin.com/in/lorenzo-cicuttin-15b280324/";
-        linekdin.textContent = "linkedin";
-        linekdin.target = "_blank";
-
-        const github = document.createElement("a");
-        github.href = "https://github.com/9elt";
-        github.textContent = "github";
-        github.target = "_blank";
-
-        const description = document.createElement("p");
-        description.append(
-            "> Data was copied to ",
-            linekdin,
-            " and ",
-            github
-        );
-
-        root.replaceChildren(...gte(10), notice, description);
+        lastMessage();
     }
+}
+
+function lastMessage() {
+    const notice = document.createElement("p");
+    notice.textContent = "> System deleted successfully";
+
+    const linekdin = document.createElement("a");
+    linekdin.href = "https://www.linkedin.com/in/lorenzo-cicuttin-15b280324/";
+    linekdin.textContent = "linkedin";
+    linekdin.target = "_blank";
+
+    const github = document.createElement("a");
+    github.href = "https://github.com/9elt";
+    github.textContent = "github";
+    github.target = "_blank";
+
+    const description = document.createElement("p");
+    description.append(
+        "> Data was copied to ",
+        linekdin,
+        " and ",
+        github
+    );
+
+    root.replaceChildren(...gte(10), notice, description);
 }
 
 const root = document.createElement("div");
@@ -92,17 +93,19 @@ root.append(...gte(10), hello);
 
 document.body.append(root);
 
-function rnd(base, seed) {
+function random(base, seed) {
     return Math.round(base + Math.random() * seed);
 }
 
 function gte(n) {
     const nodes = new Array(n);
+
     for (let i = 0; i < n; i++) {
         const p = document.createElement("p");
         p.textContent = ">";
         nodes[i] = p;
     }
+
     return nodes;
 }
 
@@ -361,4 +364,4 @@ Broadcast message from root@localhost
 The system is going down for halt NOW!
 `.split("\n");
 
-setTimeout(countdown, 1_000);
+setTimeout(deleteGreeting, 1_000);
