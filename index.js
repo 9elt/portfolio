@@ -1,13 +1,25 @@
 const hello = document.createElement("h4");
-hello.textContent = "Welcome, I am Lorenzo, web developer and prankster";
+hello.textContent = "> Welcome, I am Lorenzo, web developer and prankster";
 
 function countdown() {
     hello.textContent = hello.textContent.slice(0, -1);
 
-    if (hello.textContent) {
-        setTimeout(countdown, 150);
+    if (hello.textContent !== "> ") {
+        setTimeout(countdown, rnd(50, 50));
     } else {
-        terminal();
+        setTimeout(run, 500);
+    }
+}
+
+let i = 0;
+function run() {
+    hello.textContent += "delete system".charAt(i);
+
+    if (++i < "> delete system".length) {
+        setTimeout(run, rnd(50, 200));
+    }
+    else {
+        setTimeout(terminal, 1_500);
     }
 }
 
@@ -28,9 +40,24 @@ function terminal() {
         setTimeout(terminal, 7);
     }
     else {
+        line = 0;
+        clear();
+    }
+}
+
+function clear() {
+    const p = document.createElement("p");
+    p.textContent = ">";
+    root.append(p);
+    window.scrollTo(0, document.body.scrollHeight);
+
+    if (line++ < 100) {
+        setTimeout(clear, 20);
+    }
+    else {
         setTimeout(() => {
-            const notice = document.createElement("h4");
-            notice.textContent = "System is empty, data has been copied";
+            const notice = document.createElement("p");
+            notice.textContent = "> System deleted successfully";
 
             const linekdin = document.createElement("a");
             linekdin.href = "https://www.linkedin.com/in/lorenzo-cicuttin-15b280324/";
@@ -44,22 +71,36 @@ function terminal() {
 
             const description = document.createElement("p");
             description.append(
-                "For information, you can reach me on ",
+                "> Data was copied to ",
                 linekdin,
-                " or ",
+                " and ",
                 github
             );
 
-            root.replaceChildren(notice, description);
+            root.replaceChildren(...gte(10), notice, description);
         }, 2_000);
     }
 }
 
 const root = document.createElement("div");
 root.id = "root";
-root.append(hello);
+root.append(...gte(10), hello);
 
 document.body.append(root);
+
+function rnd(base, seed) {
+    return Math.round(base + Math.random() * seed);
+}
+
+function gte(n) {
+    const nodes = new Array(n);
+    for (let i = 0; i < n; i++) {
+        const p = document.createElement("p");
+        p.textContent = ">";
+        nodes[i] = p;
+    }
+    return nodes;
+}
 
 const output = `\
 Job for apache2.service failed because the control process exited with error code.
