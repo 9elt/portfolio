@@ -25,7 +25,7 @@ function run() {
 
 let line = 0;
 function terminal() {
-    if (line >= output.length) {
+    if (root.children.length >= output.length) {
         root.children[0].remove();
     }
 
@@ -46,39 +46,43 @@ function terminal() {
 }
 
 function clear() {
+    if (root.children.length >= output.length) {
+        root.children[0].remove();
+    }
+
     const p = document.createElement("p");
     p.textContent = ">";
     root.append(p);
+
+    line++;
     window.scrollTo(0, document.body.scrollHeight);
 
-    if (line++ < 100) {
+    if (line < 150) {
         setTimeout(clear, 20);
     }
     else {
-        setTimeout(() => {
-            const notice = document.createElement("p");
-            notice.textContent = "> System deleted successfully";
+        const notice = document.createElement("p");
+        notice.textContent = "> System deleted successfully";
 
-            const linekdin = document.createElement("a");
-            linekdin.href = "https://www.linkedin.com/in/lorenzo-cicuttin-15b280324/";
-            linekdin.textContent = "linkedin";
-            linekdin.target = "_blank";
+        const linekdin = document.createElement("a");
+        linekdin.href = "https://www.linkedin.com/in/lorenzo-cicuttin-15b280324/";
+        linekdin.textContent = "linkedin";
+        linekdin.target = "_blank";
 
-            const github = document.createElement("a");
-            github.href = "https://github.com/9elt";
-            github.textContent = "github";
-            github.target = "_blank";
+        const github = document.createElement("a");
+        github.href = "https://github.com/9elt";
+        github.textContent = "github";
+        github.target = "_blank";
 
-            const description = document.createElement("p");
-            description.append(
-                "> Data was copied to ",
-                linekdin,
-                " and ",
-                github
-            );
+        const description = document.createElement("p");
+        description.append(
+            "> Data was copied to ",
+            linekdin,
+            " and ",
+            github
+        );
 
-            root.replaceChildren(...gte(10), notice, description);
-        }, 2_000);
+        root.replaceChildren(...gte(10), notice, description);
     }
 }
 
@@ -100,6 +104,11 @@ function gte(n) {
         nodes[i] = p;
     }
     return nodes;
+}
+
+let pHeight = undefined;
+function getPHeigth() {
+    return pHeight || (pHeight = document.querySelector("p").clientHeight) || 10;
 }
 
 const output = `\
