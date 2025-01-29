@@ -109,11 +109,6 @@ function gte(n) {
     return nodes;
 }
 
-let pHeight = undefined;
-function getPHeigth() {
-    return pHeight || (pHeight = document.querySelector("p").clientHeight) || 10;
-}
-
 const output = `\
 Job for apache2.service failed because the control process exited with error code.
 See "systemctl status apache2.service" and "journalctl -xe" for details.
