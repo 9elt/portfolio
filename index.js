@@ -39,7 +39,6 @@ function terminalOutput() {
         setTimeout(terminalOutput, 7);
     }
     else {
-        i2 = 0;
         emptyLines();
     }
 }

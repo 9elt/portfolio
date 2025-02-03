@@ -28,3 +28,8 @@ body {
 a {
     color: #09f;
 }
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
