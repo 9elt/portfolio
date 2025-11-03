@@ -9,12 +9,19 @@ window.addEventListener("mousemove", function (e) {
 var emailElement = document.querySelector(".email.crypto");
 var encryptedEmail = emailElement.textContent;
 var email = endecode(encryptedEmail);
-emailElement.addEventListener("mouseenter", decrypt);
-emailElement.addEventListener("click", decrypt);
+if (
+    typeof matchMedia !== "undefined"
+    && matchMedia("(pointer: coarse)").matches
+) {
+    setTimeout(decrypt, 1000);
+}
+else {
+    emailElement.addEventListener("mouseenter", decrypt);
+    emailElement.addEventListener("click", decrypt);
+}
 function decrypt() {
     emailElement.removeEventListener("mouseenter", decrypt);
     emailElement.removeEventListener("click", decrypt);
-    emailElement.classList.remove("crypto");
     emailElement.href = "mailto:" + email;
     var i = 0;
     function loop() {
