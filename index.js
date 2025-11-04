@@ -6,7 +6,7 @@ window.addEventListener("mousemove", function (e) {
         + x + "% "
         + y + "px, var(--from) 0%, var(--to) var(--radius))";
 });
-var emailElement = document.querySelector(".email.crypto");
+var emailElement = document.querySelector(".email");
 var encryptedEmail = emailElement.textContent;
 var email = endecode(encryptedEmail);
 if (
