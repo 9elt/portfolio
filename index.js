@@ -13,7 +13,7 @@ if (
     typeof matchMedia !== "undefined"
     && matchMedia("(pointer: coarse)").matches
 ) {
-    setTimeout(decrypt, 1000);
+    window.addEventListener("click", decrypt);
 }
 else {
     emailElement.addEventListener("mouseenter", decrypt);
