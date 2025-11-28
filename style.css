@@ -17,13 +17,13 @@ body {
 body {
     color: #eee;
     background-color: #141414;
-    font-family: Arial, sans-serif;
+    font-family: mono;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     gap: 32px;
-    --from: #191a14;
+    --from: #20211a;
     --to: #090908;
     --radius: 2000px;
     background-image: radial-gradient(
@@ -51,4 +51,7 @@ main {
 .profile-pic img {
     width: 100%;
     height: 100%;
+}
+.number {
+    color: #888;
 }
